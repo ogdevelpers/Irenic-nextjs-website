@@ -22,7 +22,7 @@ export default function FeaturesSection() {
               </ScrollView>
               <ScrollView>
                 <p className="mt-6">
-                Reach out directly or visit us at our office. We're ready to discuss your next event.
+                Reach out directly or visit us at our office. We are ready to discuss your next event.
                 </p>
               </ScrollView>
             </div>

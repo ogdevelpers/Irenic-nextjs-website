@@ -15,7 +15,7 @@ export default function PortfolioSection() {
             The Irenic ecosystem brings together our models
           </h2>
           <p className="max-w-sm sm:ml-auto">
-          Showcasing Memorable Experiences We've Crafted for Our Clients
+          Showcasing Memorable Experiences We have Crafted for Our Clients
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-20">

@@ -14,7 +14,7 @@ export default function StatsSection() {
           </ScrollView>
           <ScrollView delay={0.2}>
             <p>
-              At Irenic, we don't just organize events — we craft memorable
+              At Irenic, we dont just organize events — we craft memorable
               experiences that bring people together, celebrate achievements,
               and create lasting connections.
             </p>
