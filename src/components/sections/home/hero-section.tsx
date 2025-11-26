@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "motion/react";
 
 import { TextEffect } from "@/components/motion-primitives/text-effect";
 import { AnimatedGroup } from "@/components/motion-primitives/animated-group";
@@ -60,7 +62,17 @@ export default function HeroSection() {
               }}
               className="absolute inset-0 -z-20"
             >
-              <div className="h-screen xl:h-auto absolute inset-2 -z-10 overflow-hidden rounded-3xl border border-black/10 lg:aspect-video lg:rounded-[3rem] dark:border-white/5">
+              <motion.div 
+                className="h-screen xl:h-auto absolute inset-2 -z-10 overflow-hidden rounded-3xl border border-black/10 lg:aspect-video lg:rounded-[3rem] dark:border-white/5"
+                animate={{
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
                 <video
                   autoPlay
                   loop
@@ -70,10 +82,43 @@ export default function HeroSection() {
                 >
                   <source src="/hero-light.mp4" type="video/mp4" />
                 </video>
-              </div>
+              </motion.div>
             </AnimatedGroup>
 
-            <div className="absolute inset-0 -z-10 size-full "></div>
+            {/* Animated gradient orbs */}
+            <motion.div
+              className="absolute inset-0 -z-10 size-full"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 2 }}
+            >
+              <motion.div
+                className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+                animate={{
+                  x: [0, 50, 0],
+                  y: [0, 30, 0],
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div
+                className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/15 rounded-full blur-3xl"
+                animate={{
+                  x: [0, -50, 0],
+                  y: [0, -30, 0],
+                  scale: [1, 1.3, 1],
+                }}
+                transition={{
+                  duration: 12,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+            </motion.div>
             <div className="mx-auto max-w-7xl px-6">
               <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
                 {/* <AnimatedGroup variants={transitionVariants}>
@@ -132,20 +177,34 @@ export default function HeroSection() {
                   }}
                   className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
                 >
-                  <div
+                  <motion.div
                     key={1}
-                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5 relative overflow-hidden"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
+                    <motion.div
+                      className="absolute inset-0 bg-primary/20"
+                      initial={{ x: "-100%" }}
+                      whileHover={{ x: "100%" }}
+                      transition={{ duration: 0.6 }}
+                    />
                     <Button
                       asChild
                       size="lg"
-                      className="rounded-xl px-5 text-base"
+                      className="rounded-xl px-5 text-base relative z-10 hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                     >
                       <Link href="#services">
-                        <span className="text-nowrap">Services</span>
+                        <motion.span 
+                          className="text-nowrap flex items-center gap-2"
+                          whileHover={{ x: 5 }}
+                        >
+                          Services
+                          <ArrowRight className="size-4" />
+                        </motion.span>
                       </Link>
                     </Button>
-                  </div>
+                  </motion.div>
                 </AnimatedGroup>
               </div>
             </div>

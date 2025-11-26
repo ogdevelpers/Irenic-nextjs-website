@@ -7,16 +7,34 @@ import { FOOTER_LINKS } from "@/content/footer";
 
 export default function FooterSection() {
   return (
-    <footer className="py-16 md:py-32">
-      <div className="mx-auto max-w-5xl px-6">
+    <footer className="py-16 md:py-32 relative overflow-hidden border-t border-primary/20">
+      {/* Animated background */}
+      <motion.div
+        className="absolute bottom-0 left-1/2 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2"
+        animate={{
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      <div className="mx-auto max-w-5xl px-6 relative z-10">
         <ScrollView>
-          <Link
-            href="/"
-            aria-label="go home"
-            className="mx-auto block size-fit"
+          <motion.div
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ duration: 0.3 }}
           >
-            <Logo />
-          </Link>
+            <Link
+              href="/"
+              aria-label="go home"
+              className="mx-auto block size-fit"
+            >
+              <Logo />
+            </Link>
+          </motion.div>
         </ScrollView>
         <ScrollView stagger delay={0.1}>
           <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
@@ -31,12 +49,19 @@ export default function FooterSection() {
                       filter: "blur(0px)",
                     },
                   }}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <Link
                     href={link.href}
-                    className="text-muted-foreground hover:text-primary block duration-150"
+                    className="text-muted-foreground hover:text-primary block duration-300 relative group"
                   >
-                    <span>{link.title}</span>
+                    <span className="relative z-10">{link.title}</span>
+                    <motion.span
+                      className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary"
+                      whileHover={{ width: "100%" }}
+                      transition={{ duration: 0.3 }}
+                    />
                   </Link>
                 </motion.div>
               </div>
@@ -45,13 +70,18 @@ export default function FooterSection() {
         </ScrollView>
         <ScrollView delay={0.15} viewMargin="0px 0px -20px 0px">
           <div className="my-8 flex flex-wrap justify-center gap-6 text-sm">
-            <Link
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X/Twitter"
-              className="text-muted-foreground hover:text-primary block"
+            <motion.div
+              whileHover={{ scale: 1.2, rotate: 360 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.3 }}
             >
+              <Link
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X/Twitter"
+                className="text-muted-foreground hover:text-primary block transition-colors duration-300"
+              >
               <svg
                 className="size-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -65,13 +95,19 @@ export default function FooterSection() {
                 ></path>
               </svg>
             </Link>
-            <Link
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="text-muted-foreground hover:text-primary block"
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.2, rotate: 360 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.3 }}
             >
+              <Link
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-muted-foreground hover:text-primary block transition-colors duration-300"
+              >
               <svg
                 className="size-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,13 +121,19 @@ export default function FooterSection() {
                 ></path>
               </svg>
             </Link>
-            <Link
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="text-muted-foreground hover:text-primary block"
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.2, rotate: 360 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.3 }}
             >
+              <Link
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="text-muted-foreground hover:text-primary block transition-colors duration-300"
+              >
               <svg
                 className="size-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -105,13 +147,19 @@ export default function FooterSection() {
                 ></path>
               </svg>
             </Link>
-            <Link
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Threads"
-              className="text-muted-foreground hover:text-primary block"
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.2, rotate: 360 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.3 }}
             >
+              <Link
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Threads"
+                className="text-muted-foreground hover:text-primary block transition-colors duration-300"
+              >
               <svg
                 className="size-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -130,13 +178,19 @@ export default function FooterSection() {
                 ></path>
               </svg>
             </Link>
-            <Link
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-muted-foreground hover:text-primary block"
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.2, rotate: 360 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.3 }}
             >
+              <Link
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-muted-foreground hover:text-primary block transition-colors duration-300"
+              >
               <svg
                 className="size-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -150,13 +204,19 @@ export default function FooterSection() {
                 ></path>
               </svg>
             </Link>
-            <Link
-              href="#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="TikTok"
-              className="text-muted-foreground hover:text-primary block"
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.2, rotate: 360 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.3 }}
             >
+              <Link
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="TikTok"
+                className="text-muted-foreground hover:text-primary block transition-colors duration-300"
+              >
               <svg
                 className="size-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -170,14 +230,21 @@ export default function FooterSection() {
                 ></path>
               </svg>
             </Link>
+            </motion.div>
           </div>
         </ScrollView>
         <ScrollView delay={0.2} viewMargin="0px 0px -20px 0px">
-          <span className="text-muted-foreground block text-center text-sm">
+          <motion.span 
+            className="text-muted-foreground block text-center text-sm"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
             {" "}
             © {new Date().getFullYear()} Irenic Events, All Rights Reserved.
 
-          </span>
+          </motion.span>
         </ScrollView>
       </div>
     </footer>

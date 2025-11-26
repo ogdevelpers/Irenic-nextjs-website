@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS } from "@/content/nav";
+import { motion } from "motion/react";
 
 export const HeroHeader = () => {
   const [menuState, setMenuState] = React.useState(false);
@@ -24,12 +25,15 @@ export const HeroHeader = () => {
         data-state={menuState && "active"}
         className="fixed z-20 w-full px-2"
       >
-        <div
+        <motion.div
           className={cn(
             "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12",
             isScrolled &&
-              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5"
+              "bg-background/80 max-w-4xl rounded-2xl border border-primary/20 backdrop-blur-lg lg:px-5 shadow-lg shadow-primary/10"
           )}
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full justify-between lg:w-auto">
@@ -54,14 +58,29 @@ export const HeroHeader = () => {
             <div className="absolute inset-0 m-auto hidden size-fit lg:block">
               <ul className="flex gap-8 text-sm">
                 {NAV_LINKS.map((item, index) => (
-                  <li key={index}>
-                    <Link
-                      href={item.href}
-                      className=" hover:text-accent-foreground block duration-150"
+                  <motion.li 
+                    key={index}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <span>{item.name}</span>
-                    </Link>
-                  </li>
+                      <Link
+                        href={item.href}
+                        className="relative hover:text-primary block duration-300 group"
+                      >
+                        <span className="relative z-10">{item.name}</span>
+                        <motion.span
+                          className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary"
+                          whileHover={{ width: "100%" }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      </Link>
+                    </motion.div>
+                  </motion.li>
                 ))}
               </ul>
             </div>
@@ -95,7 +114,7 @@ export const HeroHeader = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </nav>
     </header>
   );

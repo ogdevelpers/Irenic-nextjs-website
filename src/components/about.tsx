@@ -1,6 +1,8 @@
+"use client";
 import { Circle, Cpu, Lock, Sparkles, Zap } from "lucide-react";
 import { ScrollView } from "./scroll-view";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 const ourPrinciples = [
   {
@@ -28,13 +30,32 @@ const ourPrinciples = [
 
 export default function ContentSection() {
   return (
-    <section className="py-16 md:py-32" id="about">
-      <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-12">
+    <section className="py-16 md:py-32 relative overflow-hidden" id="about">
+      {/* Animated background */}
+      <motion.div
+        className="absolute top-1/2 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+        animate={{
+          scale: [1, 1.3, 1],
+          x: [0, -30, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      <div className="mx-auto max-w-5xl space-y-8 px-6 md:space-y-12 relative z-10">
         <div className="mx-auto max-w-xl space-y-6 text-center md:space-y-12">
           <ScrollView>
-            <h2 className="text-balance text-4xl font-medium lg:text-5xl">
+            <motion.h2 
+              className="text-balance text-4xl font-medium lg:text-5xl"
+              whileInView={{ scale: [1, 1.02, 1] }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               About Us
-            </h2>
+            </motion.h2>
           </ScrollView>
           <ScrollView>
             <p>
@@ -46,27 +67,49 @@ export default function ContentSection() {
           </ScrollView>
         </div>
         <ScrollView>
-          <Image
-            className="rounded-(--radius) grayscale-75 object-cover aspect-[16/9] w-full"
-            src="/images/office.jpeg"
-            alt="team image"
-            height="480"
-            width="720"
-            loading="lazy"
-          />
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+            className="relative overflow-hidden rounded-lg"
+          >
+            <Image
+              className="rounded-lg grayscale-[0.3] hover:grayscale-0 object-cover aspect-[16/9] w-full transition-all duration-700"
+              src="/images/office.jpeg"
+              alt="team image"
+              height="480"
+              width="720"
+              loading="lazy"
+            />
+          </motion.div>
         </ScrollView>
         <ScrollView>
           <div className="relative mx-auto grid grid-cols-2 gap-x-3 gap-y-6 sm:gap-8 lg:grid-cols-4">
             {ourPrinciples.map((principle, index) => (
-              <div className="space-y-3" key={index}>
+              <motion.div 
+                className="space-y-3 p-4 rounded-lg hover:bg-primary/5 transition-colors duration-300 group"
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+              >
                 <div className="flex items-center gap-2">
-                  <Circle className="size-4" />
-                  <h3 className="text-sm font-medium">{principle.title}</h3>
+                  <motion.div
+                    className="text-primary"
+                    whileHover={{ rotate: 360, scale: 1.2 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <Circle className="size-4 fill-current" />
+                  </motion.div>
+                  <h3 className="text-sm font-medium group-hover:text-primary transition-colors duration-300">
+                    {principle.title}
+                  </h3>
                 </div>
-                <p className="text-muted-foreground text-sm">
+                <p className="text-muted-foreground text-sm group-hover:text-foreground transition-colors duration-300">
                   {principle.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </ScrollView>
